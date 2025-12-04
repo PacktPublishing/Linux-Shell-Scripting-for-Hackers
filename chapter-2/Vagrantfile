@@ -1,0 +1,50 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # Kali Linux VM
+  config.vm.define "kali" do |kali|
+    kali.vm.box      = "kalilinux/rolling"
+    kali.vm.hostname = "kali"
+
+    kali.vm.network "private_network", ip: "192.168.52.101"
+
+    kali.vm.provider "virtualbox" do |vb|
+      vb.name   = "Kali Linux"
+      vb.memory = 4048
+      vb.cpus   = 2
+    end
+  end
+
+  # Metasploitable 2 VM
+  config.vm.define "metasploitable2" do |metasploitable2|
+    metasploitable2.vm.box         = "Sliim/metasploitable2"
+    metasploitable2.vm.box_version = "2.0.0"
+    metasploitable2.vm.hostname    = "metasploitable2"
+
+    # Run inline shell script for configuration
+    metasploitable2.vm.provision "shell", inline: <<-SHELL
+      if ! grep -q "metasploitable2" /etc/hosts; then
+        echo "127.0.0.1 metasploitable2 metasploitable2" | sudo tee -a /etc/hosts
+      fi
+    SHELL
+
+    metasploitable2.vm.network "private_network", ip: "192.168.52.102"
+
+    # Disable shared folders
+    metasploitable2.vm.synced_folder "", "/vagrant", disabled: true
+
+    # SSH configuration
+    metasploitable2.ssh.sudo_command = "sudo %c"
+    metasploitable2.ssh.username      = "msfadmin"
+    metasploitable2.ssh.password      = "msfadmin"
+
+    metasploitable2.vm.provider "virtualbox" do |vb|
+      vb.name   = "Metasploitable 2"
+      vb.memory = 1024
+      vb.cpus   = 1
+    end
+  end
+
+end
