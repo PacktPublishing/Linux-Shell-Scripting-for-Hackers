@@ -1,4 +1,4 @@
-
+#/bin/bash
 
 # Set the target URL
 url="<http://192.168.52.102/dvwa/vulnerabilities/brute
