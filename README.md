@@ -8,7 +8,7 @@ Linux Shell Scripting for Hackers, First Edition</h1>
 Automate and scale your hacking process with bash scripting
 </h2>
 <p align="center">
-Valentine (Traw) Nachi, Donald A.  Tevault</p>
+Valentine G. Nachi, Donald A.  Tevault</p>
 
 <p align="center">
    <a href="" alt="Discord" title="Learn more on the Discord server"><img width="32px" src="https://cliply.co/wp-content/uploads/2021/08/372108630_DISCORD_LOGO_400.gif"/></a>
